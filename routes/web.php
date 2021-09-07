@@ -8,6 +8,7 @@ use App\Http\Controllers\SocialController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\FrontendController;
 
 
 /*
@@ -34,7 +35,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::prefix('users')->group(function (){
 
@@ -94,3 +95,10 @@ Route::post('/update/{id}',[ProductController::class,'ProductUpdate'])->name('pr
 Route::get('/delete/{id}',[ProductController::class,'ProductDelete'])->name('product.delete');
 
 });
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/',[FrontendController::class,'FrontPage'])->name('FrontPage');
+

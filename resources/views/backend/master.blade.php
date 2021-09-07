@@ -55,6 +55,13 @@ $route = Route::current()->getName();
                     <span>Dashboard</span></a>
             </li>
 
+             <li class="nav-item active">
+                <a class="nav-link" target="__blank" href="{{ url('/') }}">
+                   <i class="fa fa-globe"></i>
+                    <span>Visit Website</span></a>
+            </li>
+
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 

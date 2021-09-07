@@ -73,13 +73,15 @@ class CategoryController extends Controller
 		public function CategoryUpdate(Request $request , $id)
 		{
 
-		$request->validate([
+	  	$request->validate([
            'category_name' => 'required',                                      
         ]);
 
-        $data                       =  Category::find($id);
-        $data->category_name        = $request->category_name;
-        $data->save();
+          // Category::findOrFail($id);
+       Category::findOrFail($id)->update([
+            'category_name'          =>$request->category_name,
+
+          ]);
 
          Session::flash('message','Data Update Successfully');
         return redirect()->route('category.view');

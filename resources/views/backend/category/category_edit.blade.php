@@ -13,7 +13,7 @@
 
 
   <h4 class="card-header  text-center" style="background: #000000;color: white">Edit Category </h4>
-  <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+  <form action="{{ route('category.update',$editData->id) }}" method="post" enctype="multipart/form-data">
 
    @csrf
 
