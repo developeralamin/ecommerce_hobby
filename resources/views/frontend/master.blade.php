@@ -7,11 +7,12 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>@yield('title')</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
+     <link rel="shortcut icon" type="image/x-icon" href="">
+     <link rel="shortcut icon" href="{{ asset('backend/assets/img/img.jpg') }}" type="image/x-icon">
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('frontend/css/font-awesome.min.css') }}" type="text/css">
@@ -25,9 +26,9 @@
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
+    {{-- <div id="preloder">
         <div class="loader"></div>
-    </div>
+    </div> --}}
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -58,8 +59,8 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
+                <li class="active"><a href="{{ route('home') }}">Home</a></li>
+                <li><a href="{{ route('AllProduct') }}">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
@@ -145,11 +146,18 @@
                         <a href="{{ url('/') }}"><img src="{{ asset('frontend/img/logo.png') }}" alt=""></a>
                     </div>
                 </div>
+
+                @php 
+                $prefix = Request::route()->getprefix();
+                $route = Route::current()->getname();
+                @endphp 
+
+
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li class="{{ ($route == 'FrontPage')?'active':'' }}"><a href="{{ route('FrontPage') }}">Home</a></li>
+                            <li class="{{ ($route == 'AllProduct')?'active':'' }}"><a href="{{ route('AllProduct') }}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
@@ -263,7 +271,7 @@
     <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 
-
+   @yield('footer_js')
 
 </body>
 

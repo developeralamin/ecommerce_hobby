@@ -102,3 +102,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/',[FrontendController::class,'FrontPage'])->name('FrontPage');
 
+Route::get('/all-product',[FrontendController::class,'AllProduct'])->name('AllProduct');
+
