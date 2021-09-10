@@ -4,29 +4,11 @@
     <section class="hero">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All Category</span>
-                        </div>
-                        <ul>
-                        @foreach($categories as $category)
-                            <li><a href="#">{{ $category->category_name }}</a></li>
-                        @endforeach   
-                           {{--  <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li> --}}
-                        </ul>
-                    </div>
-                </div>
+
+
+                @include('frontend.include.category')
+
+
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
@@ -49,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
+                    <div class="hero__item set-bg" data-setbg="{{ asset('frontend/img/hero/banner.jpg') }}">
                         <div class="hero__text">
                             <span>FRUIT FRESH</span>
                             <h2>Vegetable <br />100% Organic</h2>
@@ -72,31 +54,12 @@
                @foreach($products as $product) 
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="{{ url('uploads/thumbnail',$product->product_thumbnail)}}">
-                            <h5><a href="#">{{ $product->product_name }}</a></h5>
+                            <h5><a href="{{ route('SingleProduct',$product->slug) }}">{{ $product->product_name }}</a></h5>
                         </div>
                     </div>
                  @endforeach
 
-                 {{--    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-2.jpg">
-                            <h5><a href="#">Dried Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-3.jpg">
-                            <h5><a href="#">Vegetables</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-4.jpg">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="img/categories/cat-5.jpg">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div> --}}
+               
 
                 </div>
             </div>
@@ -145,11 +108,22 @@
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+
+            
+
+               <form method="POST" action="{{ route('SingleCartProduct',$items->id) }}">
+                @csrf
+                   <input type="hidden" name="product_price" value="{{ $items->product_price }}">
+                      <li><button><i class="fa fa-shopping-cart"></i></button></li>
+
+
+               </form> 
+                             
+
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">{{ $items->product_name }}</a></h6>
+                            <h6><a href="{{ route('SingleProduct',$items->slug) }}">{{ $items->product_name }}</a></h6>
                             <h5>${{ $items->product_price }}</h5>
                         </div>
                     </div>
@@ -194,7 +168,7 @@
                             <div class="latest-prdouct__slider__item">
 
                          @foreach($products->take(4) as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{ route('SingleProduct',$product->slug) }}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{ url('uploads/thumbnail',$product->product_thumbnail) }}" alt="">
                                     </div>
@@ -209,7 +183,7 @@
                             <div class="latest-prdouct__slider__item">
 
                                 @foreach($products->take(4) as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{ route('SingleProduct',$product->slug) }}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{ url('uploads/thumbnail',$product->product_thumbnail) }}" alt="">
                                     </div>
@@ -232,7 +206,7 @@
                             <div class="latest-prdouct__slider__item">
 
                                 @foreach($products->take(4) as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{ route('SingleProduct',$product->slug) }}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{ url('uploads/thumbnail',$product->product_thumbnail) }}" alt="">
                                     </div>
@@ -249,7 +223,7 @@
 
                             <div class="latest-prdouct__slider__item">
                                  @foreach($products->take(4) as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{ route('SingleProduct',$product->slug) }}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{ url('uploads/thumbnail',$product->product_thumbnail) }}" alt="">
                                     </div>
@@ -273,7 +247,7 @@
                             <div class="latest-prdouct__slider__item">
 
                               @foreach($products->take(4) as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{ route('SingleProduct',$product->slug) }}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{ url('uploads/thumbnail',$product->product_thumbnail) }}" alt="">
                                     </div>
@@ -289,7 +263,7 @@
                             <div class="latest-prdouct__slider__item">
 
                                 @foreach($products->take(4) as $product)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{ route('SingleProduct',$product->slug) }}" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{ url('uploads/thumbnail',$product->product_thumbnail) }}" alt="">
                                     </div>

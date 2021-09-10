@@ -97,10 +97,24 @@ Route::get('/delete/{id}',[ProductController::class,'ProductDelete'])->name('pro
 });
 
 
+//All Frontend Routes Here
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/',[FrontendController::class,'FrontPage'])->name('FrontPage');
 
 Route::get('/all-product',[FrontendController::class,'AllProduct'])->name('AllProduct');
+
+Route::get('/item/{slug}',[FrontendController::class,'SingleProduct'])->name('SingleProduct');
+
+Route::get('/category-show/{cat_id}',[FrontendController::class,'CategoryWiseProduct'])->name('CategoryWiseProduct');
+
+Route::post('/singel-cart-show/{product_id}',[FrontendController::class,'SingleCartProduct'])->name('SingleCartProduct');
+
+
+
+
+
+
+
 
