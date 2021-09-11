@@ -53,10 +53,8 @@ class CartController extends Controller
 //End method
 
 	public function CouponApply(Request $request)
-	{
-		 
+	{	 
 		$coupon = Coupon::where('coupon_key',$request->coupon_key)->first();
-
 		if($coupon){
 			
 					Session::put('coupon',[
@@ -68,7 +66,6 @@ class CartController extends Controller
                return back();
 
 		}
-
 		else{
 		Session::flash('message','Coupon Data Not Match');
        return back();

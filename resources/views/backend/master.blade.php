@@ -50,7 +50,7 @@ $route = Route::current()->getName();
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url('/home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -167,6 +167,28 @@ $route = Route::current()->getName();
         </div>
     </div>
 </li>
+
+
+
+{{-- //Coupon portion --}}
+
+<li class="nav-item {{ ($prefix == '/coupon')?'active':'' }}">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3retre"
+        aria-expanded="true" aria-controls="collapsePages3retre">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Coupon</span>
+    </a>
+    <div id="collapsePages3retre" class="collapse {{ ($prefix == '/coupon')?'show':'' }}" aria-labelledby="headingPages3" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+           
+            <a class="collapse-item {{ ($route == 'coupon.view')?'active':'' }}" href="{{ route('coupon.view') }}">View Coupon</a>
+
+            <a class="collapse-item {{ ($route == 'coupon.add')?'active':'' }}" href="{{ route('coupon.add') }}">Add Coupon</a>
+           
+        </div>
+    </div>
+</li>
+
 
 
 

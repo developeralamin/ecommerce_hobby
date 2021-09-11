@@ -131,7 +131,7 @@
                              ({{  $discount =$sub_total * session()->get('coupon')['discount']/100 }} tk)</span></li>
                                <li>Total <span>${{ $sub_total - $discount }}</span></li>
                             @else
-                          <li>Total <span>${{$sub_total}}</span></li>
+                          <li>Subtotal <span>${{$sub_total}}</span></li>
                             @endif
                              
                         </ul>

@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CouponContorller;
 use App\Http\Controllers\FrontendController;
 
 
@@ -96,6 +97,25 @@ Route::post('/update/{id}',[ProductController::class,'ProductUpdate'])->name('pr
 Route::get('/delete/{id}',[ProductController::class,'ProductDelete'])->name('product.delete');
 
 });
+
+
+Route::prefix('coupon')->group(function (){
+
+Route::get('/coupon-view',[CouponContorller::class,'couponView'])->name('coupon.view');
+Route::get('/coupon-add',[CouponContorller::class,'couponAdd'])->name('coupon.add');
+Route::post('/coupon-store',[CouponContorller::class,'couponStore'])->name('coupon.store');
+Route::get('/coupon-edit/{id}',[CouponContorller::class,'couponEdit'])->name('coupon.edit');
+Route::post('/coupon-update/{id}',[CouponContorller::class,'couponUpdate'])->name('coupon.update');
+Route::get('/coupon-delete/{id}',[CouponContorller::class,'couponDelete'])->name('coupon.delete');
+
+Route::get('/coupon-inactive/{id}',[CouponContorller::class,'couponInActive'])->name('coupon.inactive');
+Route::get('/coupon-active/{id}',[CouponContorller::class,'couponActive'])->name('coupon.active');
+
+});
+
+
+
+
 
 
 //All Frontend Routes Here
