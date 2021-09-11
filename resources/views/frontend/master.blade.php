@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('frontend/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" type="text/css">
+     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
 </head>
 
 <body>
@@ -29,6 +31,8 @@
     {{-- <div id="preloder">
         <div class="loader"></div>
     </div> --}}
+
+
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -158,28 +162,43 @@
                         <ul>
                             <li class="{{ ($route == 'FrontPage')?'active':'' }}"><a href="{{ route('FrontPage') }}">Home</a></li>
                             <li class="{{ ($route == 'AllProduct')?'active':'' }}"><a href="{{ route('AllProduct') }}">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            {{-- <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
                                     <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                                     <li><a href="./checkout.html">Check Out</a></li>
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
+                             <li class="{{ ($route == 'SingleCart')?'active':'' }}"><a href="{{ route('SingleCart')  }}">Shoping Cart</a></li>
                             <li><a href="./blog.html">Blog</a></li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                        </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
-                    </div>
-                </div>
+        <div class="col-lg-3">
+            <div class="header__cart">
+
+@php
+   $user_ip = $_SERVER['REMOTE_ADDR'];
+  $total_item = App\Models\Cart::all()->where('user_ip',$user_ip)->sum(function($total){
+      return  $total->product_price * $total->qty ;
+
+  });
+
+$total_quantity = App\Models\Cart::where('user_ip',$user_ip)->sum('qty');
+    
+
+@endphp
+
+
+                <ul>
+                    <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ $total_quantity }}</span></a></li>
+                </ul>
+                <div class="header__cart__price">item: <span>${{ $total_item }}</span></div>
+            </div>
+        </div>
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>
@@ -270,6 +289,76 @@
     <script src="{{ asset('frontend/js/mixitup.min.js') }}"></script>
     <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+
+   
+{{-- sweetalert --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script type="text/javascript">
+  $(function(){
+    $(document).on('click','#delete',function(e){
+        e.preventDefault();
+        var link = $(this).attr("href");
+  
+                  Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Delete This Data?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href = link
+                      Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                      )
+                    }
+                  }) 
+    });
+  });
+</script> 
+
+{{-- toaster js --}}
+{{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> --}}
+  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+{!! Toastr::message() !!}
+
+<script>
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+              toastr.error('{{ $error }}','Error',{
+                  closeButton:true,
+                  progressBar:true,
+               });
+        @endforeach
+    @endif
+</script>
+
+<script>
+   @if(Session::has('message'))
+   var type = "{{ Session::get('alert-type','info') }}"
+   switch(type){
+      case 'info':
+      toastr.info(" {{ Session::get('message') }} ");
+      break;
+      case 'success':
+      toastr.success(" {{ Session::get('message') }} ");
+      break;
+      case 'warning':
+      toastr.warning(" {{ Session::get('message') }} ");
+      break;
+      case 'error':
+      toastr.error(" {{ Session::get('message') }} ");
+      break; 
+ }
+ @endif 
+
+</script>
 
    @yield('footer_js')
 

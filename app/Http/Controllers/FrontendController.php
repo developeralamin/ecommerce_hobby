@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Cart;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
+
 
 class FrontendController extends Controller
 {
@@ -16,6 +18,7 @@ class FrontendController extends Controller
     	 $this->data['products']   = Product::latest()->get();
     	 return view('frontend.main',$this->data);
     }
+    
 //End method
 
     public function AllProduct()
@@ -27,7 +30,9 @@ class FrontendController extends Controller
     	 return view('frontend.shop',$this->data);
 
     }
+
 //End method
+
 
     public function SingleProduct($slug)
     {
@@ -46,32 +51,37 @@ class FrontendController extends Controller
     	   $categories  = Category::all();
     	   return view('frontend.cat_wise_product',compact('cat_product','categories'));
     }
+
+
 //End method
 
     public function SingleCartProduct(Request $request ,$product_id)
     {
     	  $user_ip = $_SERVER['REMOTE_ADDR'];
-
-    	  $check = Cart::where('product_id',$product_id)->first();
+    	  $check = Cart::where('product_id',$product_id)->where('user_ip',$user_ip)->first();
     	  if ($check) {
     	  	
-    	     Cart::where('product_id',$product_id)->increment('qty');
-    	     return  back();
+    	     Cart::where('product_id',$product_id)->where('user_ip',$user_ip)->increment('qty');
+
+    	Session::flash('message','Add to Cart Successfully');
+        return back();
+
 
     	  }else{
 
     	  Cart::insert([
-    	  		 'product_id'      => $product_id,
-                 'user_ip'         => $user_ip,
+    	  		 'product_id'       => $product_id,
+                 'user_ip'          => $user_ip,
                  'qty'              =>1,
-                 'product_price'   =>$request->product_price,
-                 'created_at'      => Carbon::now(),
-
+                 'product_price'    =>$request->product_price,
+                 'created_at'       => Carbon::now(),
     	  ]);
 
     	  }
 
-    	 return  back();
+    	Session::flash('message','Add to Cart Successfully');
+        return back();
+
 
     }
 

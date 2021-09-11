@@ -8,6 +8,7 @@ use App\Http\Controllers\SocialController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontendController;
 
 
@@ -110,6 +111,13 @@ Route::get('/item/{slug}',[FrontendController::class,'SingleProduct'])->name('Si
 Route::get('/category-show/{cat_id}',[FrontendController::class,'CategoryWiseProduct'])->name('CategoryWiseProduct');
 
 Route::post('/singel-cart-show/{product_id}',[FrontendController::class,'SingleCartProduct'])->name('SingleCartProduct');
+
+
+//Cart Action here
+Route::get('/cart-show',[CartController::class,'SingleCart'])->name('SingleCart');
+Route::get('/cart-delete/{cart_id}',[CartController::class,'DeleteCart'])->name('DeleteCart');
+Route::post('/cart-update',[CartController::class,'SingleCartUpdate'])->name('SingleCartUpdate');
+Route::post('/coupon-apply',[CartController::class,'CouponApply'])->name('CouponApply');
 
 
 

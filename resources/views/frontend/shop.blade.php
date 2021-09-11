@@ -172,24 +172,30 @@
                         <div class="row">
                             <div class="product__discount__slider owl-carousel">
 
-                       @foreach($products as $product) 
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="{{ url('uploads/thumbnail',$product->product_thumbnail)}}">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            {{-- <span>Dried Fruit</span> --}}
-                                            <h5><a href="{{ route('SingleProduct',$product->slug) }}">{{ $product->product_name }}</a></h5>
-                                            <div class="product__item__price">${{ $product->product_price }} <span>$36.00</span></div>
-                                        </div>
-                                    </div>
+   @foreach($products as $product) 
+            <div class="col-lg-4">
+                <div class="product__discount__item">
+                    <div class="product__discount__item__pic set-bg"
+                        data-setbg="{{ url('uploads/thumbnail',$product->product_thumbnail)}}">
+                        <div class="product__discount__percent">-20%</div>
+                        <ul class="product__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+         <form method="POST" action="{{ route('SingleCartProduct',$product->id) }}">
+        @csrf
+            <input type="hidden" name="product_price" value="{{ $product->product_price }}">
+                <li><button><i class="fa fa-shopping-cart"></i></button></li>
+
+
+        </form> 
+                        </ul>
+                    </div>
+                    <div class="product__discount__item__text">
+                        {{-- <span>Dried Fruit</span> --}}
+                        <h5><a href="{{ route('SingleProduct',$product->slug) }}">{{ $product->product_name }}</a></h5>
+                        <div class="product__item__price">${{ $product->product_price }} <span>$36.00</span></div>
+                    </div>
+                </div>
                                 </div>
 
                          @endforeach       
@@ -232,7 +238,13 @@
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+     <form method="POST" action="{{ route('SingleCartProduct',$product->id) }}">
+        @csrf
+            <input type="hidden" name="product_price" value="{{ $product->product_price }}">
+                <li><button><i class="fa fa-shopping-cart"></i></button></li>
+
+
+        </form> 
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
