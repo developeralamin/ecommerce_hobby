@@ -97,7 +97,7 @@ class CouponContorller extends Controller
 		]);
 
 
-  Session::flash('message','Coupon InActive Successfully');
+ 		 Session::flash('message','Coupon InActive Successfully');
 		  return redirect()->route('coupon.view');
 
 	}
@@ -110,12 +110,12 @@ class CouponContorller extends Controller
 			'status' =>1
 		]);
 
-       Session::flash('message','Coupon Active Successfully');
+          Session::flash('message','Coupon Active Successfully');
 		  return redirect()->route('coupon.view');
 
 	}
 
-
+//End method
 
 
 }

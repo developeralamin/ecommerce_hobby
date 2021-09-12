@@ -85,5 +85,19 @@ class FrontendController extends Controller
 
     }
 
+//End method
+    public function SingleCart()
+    {
+         $user_ip = $_SERVER['REMOTE_ADDR'];
+
+         $carts = Cart::where('user_ip',$user_ip)->get();
+         $sub_total = Cart::all()->where('user_ip',$user_ip)->sum(function($total){
+      return  $total->product_price * $total->qty ;
+
+       });
+         return view('frontend.cart',compact('carts','sub_total'));
+    }
+
+
 
 }

@@ -13,18 +13,65 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    
-	public function SingleCart()
-	{
-		 $user_ip = $_SERVER['REMOTE_ADDR'];
 
-		 $carts = Cart::where('user_ip',$user_ip)->get();
-		 $sub_total = Cart::all()->where('user_ip',$user_ip)->sum(function($total){
-      return  $total->product_price * $total->qty ;
 
-       });
-		 return view('frontend.cart',compact('carts','sub_total'));
-	}
+	
+    public function CartShow($coupon = '')
+    { 
+
+       $discount = 0;
+
+     if($coupon == ''){
+       $user_ip = $_SERVER['REMOTE_ADDR'];
+       $carts = Cart::where('user_ip',$user_ip)->get();
+      session(['discount' => $discount]);
+      return view('frontend.cart',compact('discount','carts'));
+        
+     
+       }
+       else{
+       	   // condition for coupon
+       	   if (Coupon::where('coupon_key',$coupon)->exists()) {
+               
+       	$this->data['validity']  = Coupon::where('coupon_key',$coupon)->first()->coupon_validity;
+
+     //Start second condition
+
+     if(Carbon::now()->format('Y-m-d') <= $this->data['validity'] ){
+
+      $user_ip = $_SERVER['REMOTE_ADDR'];
+
+      $carts = Cart::where('user_ip',$user_ip)->get();
+
+     $discount = Coupon::where('coupon_key',$coupon)->first()->coupon_discount;
+        
+     session(['discount' => $discount]);
+ 
+     return view('frontend.cart',compact('carts','discount'));
+
+       	   }
+       
+       	   else{
+       	   	return back()->with('message','Coupon Date Expired');
+
+       	   }
+       	  //End second condition
+            
+         } else{
+
+          return back()->with('message','Coupon Date Blank');
+         }
+
+         //End condition
+
+      
+       }
+    }
+
+//End method
+
+
+	
 
 //End method
 
@@ -52,27 +99,6 @@ class CartController extends Controller
 	}
 //End method
 
-	public function CouponApply(Request $request)
-	{	 
-		$coupon = Coupon::where('coupon_key',$request->coupon_key)->first();
-		if($coupon){
-			
-					Session::put('coupon',[
-						'coupon_key' =>$coupon->coupon_key,
-						'discount'   =>$coupon->discount,
-					]);
-
-			  Session::flash('message','Coupon Added Successfully');
-               return back();
-
-		}
-		else{
-		Session::flash('message','Coupon Data Not Match');
-       return back();
-
-		}
-
-	}
 
 
 

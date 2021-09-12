@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CouponContorller;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\CheckOutController;
 
 
 /*
@@ -132,12 +133,28 @@ Route::get('/category-show/{cat_id}',[FrontendController::class,'CategoryWisePro
 
 Route::post('/singel-cart-show/{product_id}',[FrontendController::class,'SingleCartProduct'])->name('SingleCartProduct');
 
+Route::get('/cart-all',[FrontendController::class,'SingleCart'])->name('SingleCart');
+
 
 //Cart Action here
-Route::get('/cart-show',[CartController::class,'SingleCart'])->name('SingleCart');
+// Route::get('/cart-show', [CartController::class, 'CouponApply'])->name('CouponShow');
+// Route::get('/cart-show/{coupon}',[CartController::class,'CouponApply'])->name('CouponApply');
+
+Route::get('/cart-show', [App\Http\Controllers\CartController::class, 'CartShow'])->name('CartShow');
+
+Route::get('/cart-show/{coupon}', [App\Http\Controllers\CartController::class, 'CartShow'])->name('CartCoupon');
+
+
+
 Route::get('/cart-delete/{cart_id}',[CartController::class,'DeleteCart'])->name('DeleteCart');
 Route::post('/cart-update',[CartController::class,'SingleCartUpdate'])->name('SingleCartUpdate');
-Route::post('/coupon-apply',[CartController::class,'CouponApply'])->name('CouponApply');
+
+
+
+
+//checkoutcontroller
+Route::get('/checkout',[CheckOutController::class,'CheckOut'])->name('CheckOut');
+
 
 
 

@@ -46,6 +46,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                    @php
+
+                     $total = 0 ;
+                    @endphp
+
 
                     @foreach($carts as $cart)
 
@@ -77,7 +82,11 @@
                                         <span class="icon_close"></span>
                                     </td> --}}
                                 </tr>
+        @php
 
+           $total +=$cart->product_price*$cart->qty;
+
+         @endphp
                     @endforeach
 
 
@@ -120,22 +129,49 @@
                
          @endif
  </div>
+
+     
+
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                        	@if(Session::has('coupon'))
+                    
+                            {{-- <li>Subtotal <span>${{$total }}</span></li> --}}
+
+ {{--  @php
+
+        $atTotal = $total*$discount/100;
+        $finalcalculate = $total-$atTotal;
+    @endphp 
+
+                            <li>Coupon Name<span></span></li>
+                            <li>Discount <span>$
+                             {{ $discount ?? ''}}%({{$atTotal}} tk)</span></li>
+
+                               <li>Total <span>${{ $finalcalculate }}</span></li>
+                           
+                          <li>Subtotal <span>$</span></li>
+                          
+                             
+                        </ul>
+
+
+                        <ul> --}}
+
+                            @if(Session::has('coupon'))
                             <li>Subtotal <span>${{ $sub_total }}</span></li>
                             <li>Coupon Name<span>{{ session()->get('coupon')['coupon_key']  }}</span></li>
-                            <li>Discount <span>${{ session()->get('coupon')['discount'] }}%
-                             ({{  $discount =$sub_total * session()->get('coupon')['discount']/100 }} tk)</span></li>
+                            <li>Discount <span>{{ session()->get('coupon')['discount'] }}%
+                             ({{  $discount = $sub_total * session()->get('coupon')['discount']/100 }} tk)</span></li>
+                             
                                <li>Total <span>${{ $sub_total - $discount }}</span></li>
                             @else
                           <li>Subtotal <span>${{$sub_total}}</span></li>
                             @endif
                              
-                        </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        </ul> 
+                        <a href="{{ route('CheckOut') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
