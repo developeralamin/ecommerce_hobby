@@ -115,20 +115,39 @@
                                     placeholder="Notes about your order, e.g. special notes for delivery.">
                             </div>
                         </div>
+    @php
+
+      $subtotal = 0;
+      foreach ($carts as $key => $cart) {
+         $subtotal +=$cart->product_price*$cart->qty;
+      }
+
+  
+      $total_with = $subtotal*$discount/100;
+      $final_output = $subtotal-$total_with;
+     
+     session(['final_output' => $final_output]);
+
+
+      @endphp
+
+
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
+                                   @foreach($carts as $cart)
+                                    <li>{{$cart['product']['product_name']}}<span>${{ $cart->product_price*$cart->qty }}</span></li>
+                                   @endforeach 
+                                   
+                                   
                                 </ul>
-                <div class="checkout__order__subtotal">Subtotal <span></span></div>
+                <div class="checkout__order__subtotal">Subtotal <span>${{$subtotal}}</span></div>
 
-                <div class="checkout__order__subtotal">Discount <span></span></div>
+                <div class="checkout__order__subtotal">Discount <span>{{$discount}}%</span></div>
 
-                <div class="checkout__order__total">Total <span>$</span></div>
+                <div class="checkout__order__total">Total <span>${{$final_output}}</span></div>
 
 
                                 

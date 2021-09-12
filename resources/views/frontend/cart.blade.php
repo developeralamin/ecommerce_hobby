@@ -52,26 +52,26 @@
                     @endphp
 
 
-                    @foreach($carts as $cart)
+        @foreach($carts as $cart)
 
-                     <input type="hidden" name="cart_id[]" value="{{ $cart->id }}">
+         <input type="hidden" name="cart_id[]" value="{{ $cart->id }}">
 
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img width="40px" src="{{ url('uploads/thumbnail',$cart['product']['product_thumbnail']) }}" alt="{{ $cart['product']['product_name'] }}">
+                    <tr>
+                    <td class="shoping__cart__item">
+                        <img width="40px" src="{{ url('uploads/thumbnail',$cart['product']['product_thumbnail']) }}" alt="{{ $cart['product']['product_name'] }}">
 
-                                        <h5>{{ $cart['product']['product_name'] }}</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        ${{ $cart['product']['product_price'] }}
-                                    </td>
-                <td class="shoping__cart__quantity">
-                    <div class="quantity">
-                        <div class="pro-qty">
-                            <input type="text" name="qty[]" value="{{  $cart->qty }}" min="1">
-                        </div>
-                    </div>
-                </td>
+                            <h5>{{ $cart['product']['product_name'] }}</h5>
+                        </td>
+                        <td class="shoping__cart__price">
+                            ${{ $cart['product']['product_price'] }}
+                        </td>
+    <td class="shoping__cart__quantity">
+        <div class="quantity">
+            <div class="pro-qty">
+                <input type="text" name="qty[]" value="{{  $cart->qty }}" min="1">
+            </div>
+        </div>
+    </td>
 
                 <td class="shoping__cart__total">
                     ${{ $cart['product']['product_price'] *  $cart->qty }}
@@ -116,13 +116,13 @@
                         <div class="shoping__discount">
                             <h5>Discount Codes</h5>
 
-                <form action="{{ route('CouponApply') }}" method="POST">
+             {{--    <form action="{{ route('CartCoupon') }}" method="POST">
 
-                	@csrf
+                	@csrf --}}
 
-                    <input type="text" name="coupon_key" placeholder="Enter your coupon code">
-                    <button type="submit" class="site-btn">APPLY COUPON</button>
-                </form>
+                  <input  class="cuponvalue" class="form-control" value="" type="text" placeholder="Cupon Code">
+                  <span  type="submit" class="coupnbtn btn btn-success" >Apply Cupon</span>
+              {{--   </form> --}}
 
                         </div>
                     </div>
@@ -137,40 +137,41 @@
                         <h5>Cart Total</h5>
                         <ul>
                     
-                            {{-- <li>Subtotal <span>${{$total }}</span></li> --}}
+                            <li>Subtotal <span>${{$total }}</span></li>
 
- {{--  @php
+  @php
 
-        $atTotal = $total*$discount/100;
+        $atTotal = $total* @$discount/100;
         $finalcalculate = $total-$atTotal;
     @endphp 
 
                             <li>Coupon Name<span></span></li>
                             <li>Discount <span>$
-                             {{ $discount ?? ''}}%({{$atTotal}} tk)</span></li>
+                             {{  @$discount ?? ''}}%({{$atTotal}} tk)</span></li>
 
                                <li>Total <span>${{ $finalcalculate }}</span></li>
                            
-                          <li>Subtotal <span>$</span></li>
+                         
                           
                              
                         </ul>
 
 
-                        <ul> --}}
+                     {{--    <ul> --}}
 
-                            @if(Session::has('coupon'))
-                            <li>Subtotal <span>${{ $sub_total }}</span></li>
+                         {{--    @if(Session::has('coupon'))
+
+                            <li>Subtotal <span>${{ $total }}</span></li>
                             <li>Coupon Name<span>{{ session()->get('coupon')['coupon_key']  }}</span></li>
                             <li>Discount <span>{{ session()->get('coupon')['discount'] }}%
-                             ({{  $discount = $sub_total * session()->get('coupon')['discount']/100 }} tk)</span></li>
+                             ({{  $discount = $total * session()->get('coupon')['discount']/100 }} tk)</span></li>
                              
-                               <li>Total <span>${{ $sub_total - $discount }}</span></li>
+                               <li>Total <span>${{ $total - $discount }}</span></li>
                             @else
-                          <li>Subtotal <span>${{$sub_total}}</span></li>
+                          <li>Subtotal <span>${{$total}}</span></li>
                             @endif
                              
-                        </ul> 
+                        </ul>  --}}
                         <a href="{{ route('CheckOut') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
@@ -180,6 +181,31 @@
     <!-- Shoping Cart Section End -->
 
 
+
+
+
+@endsection
+
+
+
+
+@section('footer_js')
+
+
+
+<script type="text/javascript">
+
+$(function(){
+  
+     $('.coupnbtn').click(function(){
+            var cuponvalue = $('.cuponvalue').val();
+            window.location.href = "{{ url('cart-show') }}/"+cuponvalue;
+    });
+
+   
+ });
+
+</script> 
 
 
 

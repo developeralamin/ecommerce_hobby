@@ -28,6 +28,14 @@ use App\Http\Controllers\CheckOutController;
 // Socialite Login in Website
 // Socialite Login in Website
 
+//Laravel Prevent Browser Back Button After Logout
+
+Route::group(['middleware' => 'prevent-back-history'],function(){
+  Auth::routes();
+  
+
+
+
 Route::get('login/github',[SocialController::class,'redirectToProvider'])->name('redirectToProvider');
 
 Route::get('login/github/callback',[SocialController::class,'handleProviderCallback'])->name('handleProviderCallback');
@@ -35,8 +43,6 @@ Route::get('login/github/callback',[SocialController::class,'handleProviderCallb
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
 
 
 
@@ -140,16 +146,13 @@ Route::get('/cart-all',[FrontendController::class,'SingleCart'])->name('SingleCa
 // Route::get('/cart-show', [CartController::class, 'CouponApply'])->name('CouponShow');
 // Route::get('/cart-show/{coupon}',[CartController::class,'CouponApply'])->name('CouponApply');
 
-Route::get('/cart-show', [App\Http\Controllers\CartController::class, 'CartShow'])->name('CartShow');
-
-Route::get('/cart-show/{coupon}', [App\Http\Controllers\CartController::class, 'CartShow'])->name('CartCoupon');
+Route::get('/cart-show', [CartController::class, 'CartShow'])->name('CartShow');
+Route::get('/cart-show/{coupon}', [CartController::class, 'CartShow'])->name('CartCoupon');
 
 
 
 Route::get('/cart-delete/{cart_id}',[CartController::class,'DeleteCart'])->name('DeleteCart');
 Route::post('/cart-update',[CartController::class,'SingleCartUpdate'])->name('SingleCartUpdate');
-
-
 
 
 //checkoutcontroller
@@ -163,3 +166,5 @@ Route::get('/checkout',[CheckOutController::class,'CheckOut'])->name('CheckOut')
 
 
 
+});
+////Laravel Prevent Browser Back Button After Logout

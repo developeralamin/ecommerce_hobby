@@ -12,10 +12,10 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
+
 {
 
 
-	
     public function CartShow($coupon = '')
     { 
 
@@ -51,19 +51,18 @@ class CartController extends Controller
 
        	   }
        
-       	   else{
-       	   	return back()->with('message','Coupon Date Expired');
+   	   else{
+   	   	return back()->with('message','Coupon Date Expired');
 
-       	   }
+   	   }
        	  //End second condition
             
-         } else{
+       } else{
 
-          return back()->with('message','Coupon Date Blank');
-         }
+        return back()->with('message','Coupon Date Blank');
+       }
 
          //End condition
-
       
        }
     }

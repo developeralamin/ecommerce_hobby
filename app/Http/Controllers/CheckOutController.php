@@ -23,9 +23,12 @@ class CheckOutController extends Controller
 
  public function CheckOut(Request $request){
            
-            
-
-    return view('frontend.checkout_view');
+        $discount =  $request->session()->get('discount');
+		$auth_user = Auth::user();
+	   $user_ip = $_SERVER['REMOTE_ADDR'];
+       $carts = Cart::where('user_ip',$user_ip)->with('product')->get();
+  
+    return view('frontend.checkout_view',compact('carts','auth_user','discount'));
 
  }
 
