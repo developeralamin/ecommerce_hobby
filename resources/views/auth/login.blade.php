@@ -102,6 +102,8 @@
                        Login With <i style="color: black;" class="fa fa-github"></i>
                     </a>
 
+
+
                     {{--  <a type="" >
                          Login With <i class="fa fa-google-plus"></i>
                     </a>
@@ -121,7 +123,7 @@
                         </div>
 
 
-
+           
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -136,6 +138,17 @@
                                 @endif
                             </div>
                         </div>
+
+                         <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                <a style="color: white;margin-top: 10px;" class="btn btn-primary" href="{{ route('register') }}" type="">
+                      Register
+                    </a>
+                                
+                            </div>
+                        </div>
+
+
                     </form>
                 </div>
             </div>
