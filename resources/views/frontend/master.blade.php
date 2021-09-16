@@ -172,7 +172,7 @@
                             </li> --}}
                              <li class="{{ ($route == 'SingleCart')?'active':'' }}"><a href="{{ route('SingleCart')  }}">Shoping Cart</a></li>
                             <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                 <li class="{{ ($route == 'ContactSingle')?'active':'' }}"><a href="{{ route('ContactSingle') }}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>

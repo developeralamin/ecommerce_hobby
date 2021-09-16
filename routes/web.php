@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CouponContorller;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\PaymentController;
 
 
 /*
@@ -142,6 +144,10 @@ Route::post('/singel-cart-show/{product_id}',[FrontendController::class,'SingleC
 Route::get('/cart-all',[FrontendController::class,'SingleCart'])->name('SingleCart');
 
 
+Route::get('/contact-single',[FrontendController::class,'ContactSingle'])->name('ContactSingle');
+Route::post('/contact',[FrontendController::class,'ContactHere'])->name('ContactHere');
+
+
 //Cart Action here
 // Route::get('/cart-show', [CartController::class, 'CouponApply'])->name('CouponShow');
 // Route::get('/cart-show/{coupon}',[CartController::class,'CouponApply'])->name('CouponApply');
@@ -158,7 +164,9 @@ Route::post('/cart-update',[CartController::class,'SingleCartUpdate'])->name('Si
 //checkoutcontroller
 Route::get('/checkout',[CheckOutController::class,'CheckOut'])->name('CheckOut');
 
+//PaymentController
 
+Route::post('/payment',[PaymentController::class,'Payment'])->name('Payment');
 
 
 

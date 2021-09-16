@@ -10,6 +10,9 @@ use App\Models\City;
 use App\Models\Cart;
 use App\Models\Coupon;
 use Illuminate\Support\Facades\Session;
+
+
+
 class CheckOutController extends Controller
 {
     public function __construct()
@@ -24,11 +27,26 @@ class CheckOutController extends Controller
  public function CheckOut(Request $request){
            
         $discount =  $request->session()->get('discount');
-		$auth_user = Auth::user();
-	   $user_ip = $_SERVER['REMOTE_ADDR'];
+        
+	  	 $auth_user = Auth::user();
+	     $user_ip = $_SERVER['REMOTE_ADDR'];
        $carts = Cart::where('user_ip',$user_ip)->with('product')->get();
   
-    return view('frontend.checkout_view',compact('carts','auth_user','discount'));
+
+   
+      $subtotal = 0;
+      foreach ($carts as $key => $cart) {
+         $subtotal +=$cart->product_price*$cart->qty;
+      }
+
+  
+      $total_with = $subtotal*$discount/100;
+      $final_output = $subtotal-$total_with;
+     
+     session(['final_output' => $final_output]);
+
+  
+    return view('frontend.checkout_view',compact('subtotal','final_output','discount'));
 
  }
 

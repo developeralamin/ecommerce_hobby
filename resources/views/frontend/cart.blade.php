@@ -3,7 +3,6 @@
    <!-- Hero Section Begin -->
 
 @section('title')
-
  Shopping-Cart | Product
 @endsection
 
@@ -27,12 +26,15 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Shoping Cart Section Begin -->
+ <form action="{{ route('SingleCartUpdate') }}" method="post">
+
+                @csrf
+
     <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
-            	  <form action="{{ route('SingleCartUpdate') }}" method="post">
 
-                @csrf
+     
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
                         <table>
@@ -52,7 +54,7 @@
                     @endphp
 
 
-        @foreach($carts as $cart)
+        @forelse($carts as $cart)
 
          <input type="hidden" name="cart_id[]" value="{{ $cart->id }}">
 
@@ -87,7 +89,18 @@
            $total +=$cart->product_price*$cart->qty;
 
          @endphp
-                    @endforeach
+
+         @empty
+        
+            <tr>
+                 <td style="font-size: 23px;color: red;" colspan="50">
+                   You haven't cart item
+                </td>
+            </tr>
+         
+
+
+          @endforelse
 
 
                             </tbody>
@@ -100,11 +113,11 @@
                     <div class="shoping__cart__btns">
                         <a href="{{ route('AllProduct') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
 
-                        <button href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                <button href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                             Upadate Cart</button>
 
                     </div>
-                    </form>
+                   
                 </div>
 
                          <div class="col-lg-6">
@@ -139,17 +152,17 @@
                     
                             <li>Subtotal <span>${{$total }}</span></li>
 
-  @php
+            @php
 
-        $atTotal = $total* @$discount/100;
-        $finalcalculate = $total-$atTotal;
-    @endphp 
+                $atTotal = $total* @$discount/100;
+                $finalcalculate = $total-$atTotal;
+            @endphp 
 
-                            <li>Coupon Name<span></span></li>
-                            <li>Discount <span>$
-                             {{  @$discount ?? ''}}%({{$atTotal}} tk)</span></li>
+                <li>Coupon Name<span></span></li>
+                <li>Discount <span>$
+                 {{  @$discount ?? ''}}%({{$atTotal}} tk)</span></li>
 
-                               <li>Total <span>${{ $finalcalculate }}</span></li>
+                <li>Total <span>${{ $finalcalculate }}</span></li>
                            
                          
                           
@@ -172,14 +185,14 @@
                             @endif
                              
                         </ul>  --}}
-                        <a href="{{ route('CheckOut') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a target="__blank" href="{{ route('CheckOut') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Shoping Cart Section End -->
-
+ </form>
 
 
 

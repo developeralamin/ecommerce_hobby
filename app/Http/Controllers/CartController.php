@@ -24,7 +24,7 @@ class CartController extends Controller
      if($coupon == ''){
        $user_ip = $_SERVER['REMOTE_ADDR'];
        $carts = Cart::where('user_ip',$user_ip)->get();
-      session(['discount' => $discount]);
+
       return view('frontend.cart',compact('discount','carts'));
         
      

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Contact;
 use App\Models\Cart;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -97,7 +98,35 @@ class FrontendController extends Controller
        });
          return view('frontend.cart',compact('carts','sub_total'));
     }
+//contact section
+   
 
+   public function ContactSingle()
+   {
+       return view('frontend.contact');
+   }
+//end method
+   public function ContactHere(Request $request)
+   {
+         $this->validate($request,[
+            'contact_name'         => 'required',
+            'contact_email'        => 'required',
+            'contact_msg'          => 'required',
+        ]);
 
+         Contact::insert([
+            'contact_name'  =>$request->contact_name,
+            'contact_email' =>$request->contact_email,
+            'contact_msg'   =>$request->contact_msg,
+         ]);
+
+        // $message                 = new Contact();
+        // $message->contact_name   = $request->contact_name;
+        // $message->contact_email  = $request->contact_email;
+        // $message->contact_msg    = $request->contact_msg;
+       
+        Session::flash('message','Contact Successfully');
+        return back();
+   }
 
 }
