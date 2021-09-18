@@ -19,6 +19,7 @@ class CartController extends Controller
     public function CartShow($coupon = '')
     { 
 //this is cat portion 
+      
        $discount = 0;
 
      if($coupon == ''){
@@ -88,11 +89,12 @@ class CartController extends Controller
 
 	public function SingleCartUpdate(Request $request)
 	{
-		  foreach ($request->cart_id as $key => $item) {
-     	    	Cart::findOrFail($item)->update([
+		  foreach ($request->cart_id as $key => $items) {
+     	    	Cart::findOrFail($items)->update([
                     'qty'  => $request->qty[$key]
      	    	]);
      	    }
+
       Session::flash('message','Cart Product Update Successfully');
       return back();
 	}

@@ -14,6 +14,7 @@ use App\Http\Controllers\CouponContorller;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\WishListController;
 
 
 /*
@@ -45,6 +46,11 @@ Route::get('login/github/callback',[SocialController::class,'handleProviderCallb
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+//Start middlearee
+
+Route::group(['middleware' => 'auth'],function(){
 
 
 
@@ -129,9 +135,6 @@ Route::get('/coupon-active/{id}',[CouponContorller::class,'couponActive'])->name
 
 //All Frontend Routes Here
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/',[FrontendController::class,'FrontPage'])->name('FrontPage');
 
 Route::get('/all-product',[FrontendController::class,'AllProduct'])->name('AllProduct');
 
@@ -139,13 +142,13 @@ Route::get('/item/{slug}',[FrontendController::class,'SingleProduct'])->name('Si
 
 Route::get('/category-show/{cat_id}',[FrontendController::class,'CategoryWiseProduct'])->name('CategoryWiseProduct');
 
+
 Route::post('/singel-cart-show/{product_id}',[FrontendController::class,'SingleCartProduct'])->name('SingleCartProduct');
 
 Route::get('/cart-all',[FrontendController::class,'SingleCart'])->name('SingleCart');
 
 
-Route::get('/contact-single',[FrontendController::class,'ContactSingle'])->name('ContactSingle');
-Route::post('/contact',[FrontendController::class,'ContactHere'])->name('ContactHere');
+
 
 
 //Cart Action here
@@ -163,13 +166,26 @@ Route::post('/cart-update',[CartController::class,'SingleCartUpdate'])->name('Si
 
 //checkoutcontroller
 Route::get('/checkout',[CheckOutController::class,'CheckOut'])->name('CheckOut');
-
 //PaymentController
-
 Route::post('/payment',[PaymentController::class,'Payment'])->name('Payment');
 
+//WishList Controller portion
+
+Route::get('/wishlist/{product_id}',[WishListController::class,'WishList'])->name('wishlist');
+Route::get('/wishlist-page',[WishListController::class,'WishListPage'])->name('WishListPage');
+Route::get('/wishlist-Delete/{wishlist_id}',[WishListController::class,'WishListDelete'])->name('WishListDelete');
 
 
+});
+
+// End middleware
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/',[FrontendController::class,'FrontPage'])->name('FrontPage');
+
+Route::get('/contact-single',[FrontendController::class,'ContactSingle'])->name('ContactSingle');
+Route::post('/contact',[FrontendController::class,'ContactHere'])->name('ContactHere');
 
 
 

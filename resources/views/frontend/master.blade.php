@@ -86,8 +86,8 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li><i class="fa fa-envelope"></i>hellopeople@gmail.com</li>
+                <li>Free Shipping for all Order</li>
             </ul>
         </div>
     </div>
@@ -101,8 +101,8 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
+                  <li><i class="fa fa-envelope"></i>hellopeople@gmail.com</li>
+                <li>Free Shipping for all Order</li>
                             </ul>
                         </div>
                     </div>
@@ -152,8 +152,10 @@
                 </div>
 
                 @php 
+
                 $prefix = Request::route()->getprefix();
                 $route = Route::current()->getname();
+
                 @endphp 
 
 
@@ -187,15 +189,17 @@
   });
 
 $total_quantity = App\Models\Cart::where('user_ip',$user_ip)->sum('qty');
+
+$wishlist = App\Models\WishList::where('user_id',Auth::id())->get();
     
 
 @endphp
 
 
-                <ul>
-                    <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ $total_quantity }}</span></a></li>
-                </ul>
+        <ul>
+            <li><a href="{{ route('WishListPage') }}"><i class="fa fa-heart"></i> <span>{{ count($wishlist) }}</span></a></li>
+            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ $total_quantity }}</span></a></li>
+        </ul>
                 <div class="header__cart__price">item: <span>${{ $total_item }}</span></div>
             </div>
         </div>

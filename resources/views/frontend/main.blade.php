@@ -105,9 +105,11 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 mix do{{ $cat->id }}">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="{{ url('uploads/thumbnail',$items->product_thumbnail) }}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                <ul class="featured__item__pic__hover">
+
+       <li><a href="{{ route('wishlist',$items->id) }}"><i class="fa fa-heart"></i></a></li>
+
+       <li><a href="#"><i class="fa fa-retweet"></i></a></li>
 
             
 
