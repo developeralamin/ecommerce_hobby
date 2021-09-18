@@ -58,20 +58,24 @@ class PaymentController extends Controller
 
     foreach ($cartsss as $key => $items) {
     	 Billing::insertGetId([
-    		'user_id'          => Auth::user()->id,
+    		'user_id'              => Auth::user()->id,
             'sale_id'          => $sale_id,
             'shipping_id'      => $shipping_id,
-    		'product_id'       => $items->product_id,       
-    		'product_price'    => $items['product']['product_price'],
-    		'qty'              => $items->qty,
+    		'product_id'           => $items->product_id,       
+    		'product_price'        => $items['product']['product_price'],
+    		'qty'                  => $items->qty,
             'created_at'       =>Carbon::now(),
     	]);
 
       Product::findOrFail($items->product_id)->decrement('product_quantity',$items->qty);
-      $items->delete();    
+        $items->delete();    
     }
 
-  return back()->with('message','Product CheckOut Successfully Done');
+
+    Session::flash('message','Product CheckOut Successfully Done');
+     return back();
+
+
 
     }
 

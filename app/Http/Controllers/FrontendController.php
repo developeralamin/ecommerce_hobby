@@ -25,8 +25,8 @@ class FrontendController extends Controller
     public function AllProduct()
     {
 
-    	 $this->data['pcount']   = Product::count();
-    	 $this->data['products']   = Product::cursorPaginate(4);
+    	 $this->data['pcount']      = Product::count();
+    	 $this->data['products']    = Product::cursorPaginate(4);
     	  $this->data['categories']  = Category::all();
     	 return view('frontend.shop',$this->data);
 
