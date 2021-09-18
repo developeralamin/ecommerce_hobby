@@ -39,8 +39,8 @@ class WishListController extends Controller
 
     public function WishListPage()
     {
-    	// returwishlist_idn 'ok';
-    	// die();
+    	//wishlist page show here
+    	
     	$wishlist = WishList::where('user_id',Auth::id())->latest()->get();
 
     	return view('frontend.wishlistpage',compact('wishlist'));
