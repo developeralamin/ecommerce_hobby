@@ -18,7 +18,7 @@ class CartController extends Controller
 
     public function CartShow($coupon = '')
     { 
-
+//this is cat portion 
        $discount = 0;
 
      if($coupon == ''){
