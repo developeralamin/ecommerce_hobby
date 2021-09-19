@@ -257,15 +257,25 @@ $wishlist = App\Models\WishList::where('user_id',Auth::id())->get();
                     <div class="footer__widget">
                         <h6>Join Our Newsletter Now</h6>
                         <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
+           
+
+                    <form action="{{ route('news_letter') }}" method="POST">
+                        @csrf
+                        <input type="text" name="email" placeholder="Enter your mail">
+                        <button type="submit" class="site-btn">Subscribe</button>
+
+                    </form>
+
+
                         <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
+
+
+                            <a id="fa_btn" href="#"><i class="fa fa-facebook"></i></a>
+                            <a id="in_btn" href="#"><i class="fa fa-instagram"></i></a>
+                            <a id="tw_btn" href="#"><i class="fa fa-twitter"></i></a>
+                            <a id="pin_btn" href="#"><i class="fa fa-pinterest"></i></a>
+
+
                         </div>
                     </div>
                 </div>
@@ -365,6 +375,31 @@ $wishlist = App\Models\WishList::where('user_id',Auth::id())->get();
 </script>
 
    @yield('footer_js')
+
+{{-- <script type="text/javascript">
+    
+// facebook
+// instagram
+// twitter
+// pinterest
+
+//share button in social media
+
+ const facebookbtn = documentGetElementById('fa_btn');
+ const instagram = documentGetElementById('in_btn');
+ const twitter = documentGetElementById('tw_btn');
+ const pinterest = documentGetElementById('pin_btn');
+
+//post url posttitle
+
+let postUrl =encodeURI(document.location.href);
+
+
+facebookbtn.setAttribute("href",'https://www.facebook.com/sharer.php?u=${postUrl}');
+
+
+</script> --}}
+
 
 </body>
 

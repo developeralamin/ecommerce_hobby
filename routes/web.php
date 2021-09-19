@@ -15,6 +15,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WishListController;
+use App\Http\Controllers\NewsLetterController;
 
 
 /*
@@ -180,12 +181,20 @@ Route::get('/wishlist-Delete/{wishlist_id}',[WishListController::class,'WishList
 
 // End middleware
 
+Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('adminDashboard');
+
+Route::get('/customer/dashboard', [App\Http\Controllers\CustomerController::class, 'index'])->name('customerDashboard');
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/',[FrontendController::class,'FrontPage'])->name('FrontPage');
 
 Route::get('/contact-single',[FrontendController::class,'ContactSingle'])->name('ContactSingle');
 Route::post('/contact',[FrontendController::class,'ContactHere'])->name('ContactHere');
+
+Route::post('/news-letter',[FrontendController::class,'news_letter'])->name('news_letter');
+
 
 
 

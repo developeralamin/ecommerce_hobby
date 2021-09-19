@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Contact;
 use App\Models\Cart;
+use App\Models\NewsLetter;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
@@ -15,8 +16,9 @@ class FrontendController extends Controller
 {
     public function FrontPage()
     {
-    	 $this->data['categories']  = Category::all();
-    	 $this->data['products']   = Product::latest()->get();
+    	 $this->data['categories']     = Category::all();
+         $this->data['products']      = Product::latest()->get();
+    	 $this->data['news_letter']   = NewsLetter::latest()->get();
     	 return view('frontend.main',$this->data);
     }
     
@@ -119,14 +121,33 @@ class FrontendController extends Controller
             'contact_email' =>$request->contact_email,
             'contact_msg'   =>$request->contact_msg,
          ]);
-
-        // $message                 = new Contact();
-        // $message->contact_name   = $request->contact_name;
-        // $message->contact_email  = $request->contact_email;
-        // $message->contact_msg    = $request->contact_msg;
        
         Session::flash('message','Contact Successfully');
         return back();
    }
+
+
+//End methodd
+
+   public function news_letter(Request $request)
+   {
+        $this->validate($request,[
+            'email'         => 'required',
+            
+        ]);
+
+         NewsLetter::insert([
+            'email'        =>$request->email,
+             'created_at'   =>Carbon::now(),
+         ]);
+       
+        Session::flash('message','News Letter Add Successfully');
+        return back();
+
+   }
+
+
+
+
 
 }
