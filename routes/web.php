@@ -16,6 +16,7 @@ use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WishListController;
 use App\Http\Controllers\NewsLetterController;
+use App\Http\Controllers\CustomerController;
 
 
 /*
@@ -196,6 +197,27 @@ Route::get('/wishlist-Delete/{wishlist_id}',[WishListController::class,'WishList
 Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('adminDashboard');
 
 Route::get('/customer/dashboard', [App\Http\Controllers\CustomerController::class, 'index'])->name('customerDashboard');
+
+//Customer profile settings route here
+
+Route::prefix('settings')->group(function (){
+
+Route::get('/customer/profile', [App\Http\Controllers\CustomerController::class, 'profile'])->name('customerProfile');
+
+Route::get('/edit/profile/{id}', [App\Http\Controllers\CustomerController::class, 'Editprofile'])->name('EditcustomerProfile');
+
+Route::post('/store_customer/profile/{id}', [App\Http\Controllers\CustomerController::class, 'Updateprofile'])->name('UpdatecustomerProfile');
+
+
+Route::get('/customer-password/view',[CustomerController::class,'customerPasswordView'])->name('customerpassword.view');
+
+Route::post('/customer-password/update',[CustomerController::class,'customerPasswordUpdate'])->name('customerpassword.update');
+
+
+});
+
+
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

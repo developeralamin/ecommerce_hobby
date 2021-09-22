@@ -3,7 +3,7 @@
    <!-- Hero Section Begin -->
 
 @section('title')
-Customer| Dashboard
+    Customer| Dashboard
 @endsection
 
 
@@ -27,14 +27,7 @@ Customer| Dashboard
 
 
 <div class="container" style="padding: 10% 0;">
-   {{--   @foreach($users as $user)
-        <td>{{ $user->email }}</td>
-
-     @endforeach --}}
-
-  {{--  {{Auth::user()->email}}
-   {{Auth::user()->name}}
-   {{Auth::user()->password}} --}}
+   
 
 
     <div class="row">
@@ -43,7 +36,7 @@ Customer| Dashboard
       <div class="card-body">
          <h5 class="text-center">My Profile</h5>
         <a href="{{ url('/') }}" class="btn btn-primary btn-sm btn-block">Home</a>
-        <a href="" class="btn btn-success btn-sm btn-block">Settings Profile</a>
+        <a href="{{ route('customerProfile') }}" class="btn btn-success btn-sm btn-block">Settings Profile</a>
 
       <a class="btn btn-danger btn-sm btn-block"  href="{{ route('logout') }}"
        onclick="event.preventDefault();
