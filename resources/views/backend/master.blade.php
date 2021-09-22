@@ -189,7 +189,24 @@ $route = Route::current()->getName();
     </div>
 </li>
 
+{{-- //News Letter Portion --}}
 
+<li class="nav-item {{ ($prefix == '/newsletter')?'active':'' }}">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3retrenewsleeter"
+        aria-expanded="true" aria-controls="collapsePages3retrenewsleeter">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>NewsLetter</span>
+    </a>
+    <div id="collapsePages3retrenewsleeter" class="collapse {{ ($prefix == '/newsletter')?'show':'' }}" aria-labelledby="headingPages3" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+           
+            <a class="collapse-item {{ ($route == 'news.view')?'active':'' }}" href="{{ route('news.view') }}">View NewsLetter</a>
+
+            <a class="collapse-item {{ ($route == 'contact.view')?'active':'' }}" href="{{ route('contact.view') }}">View Contact</a>
+           
+        </div>
+    </div>
+</li>
 
 
 

@@ -132,6 +132,16 @@ Route::get('/coupon-active/{id}',[CouponContorller::class,'couponActive'])->name
 
 
 
+Route::prefix('newsletter')->group(function (){
+
+Route::get('/news-view',[NewsLetterController::class,'newsView'])->name('news.view');
+Route::get('/news-delete/{id}',[NewsLetterController::class,'newsDelete'])->name('news.delete');
+
+Route::get('/contact-view',[NewsLetterController::class,'contactView'])->name('contact.view');
+Route::get('/contact-delete/{id}',[NewsLetterController::class,'contactdelete'])->name('contact.delete');
+
+});
+
 
 
 //All Frontend Routes Here
@@ -179,7 +189,9 @@ Route::get('/wishlist-Delete/{wishlist_id}',[WishListController::class,'WishList
 
 });
 
-// End middleware
+// End protected middleware all route here
+
+
 
 Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('adminDashboard');
 
