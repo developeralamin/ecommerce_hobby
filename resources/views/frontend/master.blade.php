@@ -67,14 +67,14 @@
                 <li><a href="{{ route('AllProduct') }}">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
+                        <li><a href="#">Shop Details</a></li>
+                        <li><a href="#">Shoping Cart</a></li>
+                        <li><a href="#">Check Out</a></li>
+                        <li><a href="#">Blog Details</a></li>
                     </ul>
                 </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -162,20 +162,23 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="{{ ($route == 'FrontPage')?'active':'' }}"><a href="{{ route('FrontPage') }}">Home</a></li>
-                            <li class="{{ ($route == 'AllProduct')?'active':'' }}"><a href="{{ route('AllProduct') }}">Shop</a></li>
-                            {{-- <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li> --}}
-                             <li class="{{ ($route == 'SingleCart')?'active':'' }}"><a href="{{ route('SingleCart')  }}">Shoping Cart</a></li>
-                            <li><a href="./blog.html">Blog</a></li>
-                 <li class="{{ ($route == 'ContactSingle')?'active':'' }}"><a href="{{ route('ContactSingle') }}">Contact</a></li>
+                            <li class="{{ ($route == 'FrontPage')?'active':'' }}"><a href="{{ route('FrontPage') }}">Home</a>
+                            </li>
+
+                            <li class="{{ ($route == 'AllProduct')?'active':'' }}"><a href="{{ route('AllProduct') }}">Shop</a>
+                            </li>
+                           
+                             <li class="{{ ($route == 'SingleCart')?'active':'' }}"><a href="{{ route('SingleCart')  }}">Shoping Cart</a>
+                             </li>
+
+                      <li><a href="#">Blog</a></li>
+
+                 <li class="{{ ($route == 'ContactSingle')?'active':'' }}"><a href="{{ route('ContactSingle') }}">Contact</a>
+                 </li>
+
                         </ul>
+
+
                     </nav>
                 </div>
         <div class="col-lg-3">
@@ -223,7 +226,7 @@ $wishlist = App\Models\WishList::where('user_id',Auth::id())->get();
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="{{ url('/') }}"><img src="{{ asset('frontend/img/logo.png') }}" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
