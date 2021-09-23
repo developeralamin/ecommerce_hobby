@@ -108,12 +108,12 @@
                     </div>
         <div class="col-lg-6 col-md-5">
             <div class="header__top__right">
-                <div class="header__top__right__social">
+                {{-- <div class="header__top__right__social">
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>
                     <a href="#"><i class="fa fa-linkedin"></i></a>
                     <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                </div>
+                </div> --}}
                 <div class="header__top__right__language">
                     <img src="img/language.png" alt="">
                     <div>English</div>
@@ -194,7 +194,11 @@
 $total_quantity = App\Models\Cart::where('user_ip',$user_ip)->sum('qty');
 
 $wishlist = App\Models\WishList::where('user_id',Auth::id())->get();
-    
+      $sharess = Share::page('http://127.0.0.1:8000/', 'Social Share')
+            ->facebook()
+            ->twitter()
+            ->linkedin('Extra linkedin summary can be passed here')
+            ->whatsapp()->getRawLinks();
 
 @endphp
 
@@ -272,12 +276,17 @@ $wishlist = App\Models\WishList::where('user_id',Auth::id())->get();
 
                         <div class="footer__widget__social">
 
+                        @foreach($sharess as $key=>$value)
 
-                            <a id="fa_btn" href="#"><i class="fa fa-facebook"></i></a>
-                            <a id="in_btn" href="#"><i class="fa fa-instagram"></i></a>
+            <a id="fa_btn" target="__blank"  href="{{ $value }}">{{ $key }}</a>
+            
+
+                         @endforeach
+
+                          
+                  {{--    <a id="in_btn" href="#"><i class="fa fa-instagram"></i></a>
                             <a id="tw_btn" href="#"><i class="fa fa-twitter"></i></a>
-                            <a id="pin_btn" href="#"><i class="fa fa-pinterest"></i></a>
-
+                            <a id="pin_btn" href="#"><i class="fa fa-pinterest"></i></a> --}}
 
                         </div>
                     </div>
@@ -287,7 +296,8 @@ $wishlist = App\Models\WishList::where('user_id',Auth::id())->get();
                 <div class="col-lg-12">
                     <div class="footer__copyright">
                         <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This E-commerce is developed By <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">alamin</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This E-commerce is developed By <i class="fa fa-heart" aria-hidden="true"></i> by 
+  <a href="#" style="color: red;" target="_blank">alamin</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
                         <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
                     </div>

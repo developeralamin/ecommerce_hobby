@@ -148,6 +148,13 @@ Route::get('/contact-delete/{id}',[NewsLetterController::class,'contactdelete'])
 //All Frontend Routes Here
 
 
+});// End protected middleware all route here
+
+
+
+
+
+
 Route::get('/all-product',[FrontendController::class,'AllProduct'])->name('AllProduct');
 
 Route::get('/item/{slug}',[FrontendController::class,'SingleProduct'])->name('SingleProduct');
@@ -158,8 +165,6 @@ Route::get('/category-show/{cat_id}',[FrontendController::class,'CategoryWisePro
 Route::post('/singel-cart-show/{product_id}',[FrontendController::class,'SingleCartProduct'])->name('SingleCartProduct');
 
 Route::get('/cart-all',[FrontendController::class,'SingleCart'])->name('SingleCart');
-
-
 
 
 
@@ -188,15 +193,15 @@ Route::get('/wishlist-page',[WishListController::class,'WishListPage'])->name('W
 Route::get('/wishlist-Delete/{wishlist_id}',[WishListController::class,'WishListDelete'])->name('WishListDelete');
 
 
-});
 
-// End protected middleware all route here
+
 
 
 
 Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('adminDashboard');
 
 Route::get('/customer/dashboard', [App\Http\Controllers\CustomerController::class, 'index'])->name('customerDashboard');
+
 
 //Customer profile settings route here
 
@@ -208,16 +213,12 @@ Route::get('/edit/profile/{id}', [App\Http\Controllers\CustomerController::class
 
 Route::post('/store_customer/profile/{id}', [App\Http\Controllers\CustomerController::class, 'Updateprofile'])->name('UpdatecustomerProfile');
 
-
 Route::get('/customer-password/view',[CustomerController::class,'customerPasswordView'])->name('customerpassword.view');
 
 Route::post('/customer-password/update',[CustomerController::class,'customerPasswordUpdate'])->name('customerpassword.update');
 
 
 });
-
-
-
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -228,8 +229,7 @@ Route::get('/contact-single',[FrontendController::class,'ContactSingle'])->name(
 Route::post('/contact',[FrontendController::class,'ContactHere'])->name('ContactHere');
 
 Route::post('/news-letter',[FrontendController::class,'news_letter'])->name('news_letter');
-
-
+Route::get('/social_button',[FrontendController::class,'social_button'])->name('social_button');
 
 
 

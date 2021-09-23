@@ -10,7 +10,7 @@ use App\Models\Cart;
 use App\Models\NewsLetter;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
-
+use Share;
 
 class FrontendController extends Controller
 {
@@ -145,9 +145,22 @@ class FrontendController extends Controller
         return back();
 
    }
+//End method
 
+   public function social_button()
+   {
+      // $sharess = Share::page('http://127.0.0.1:8000/', 'Social Share')
+      //       ->facebook()
+      //       ->twitter()
+      //       ->linkedin('Extra linkedin summary can be passed here')
+      //       ->whatsapp()->getRawLinks();
 
+      // // dd($share);      
+      // // return view('frontend.main',$this->data);
+      //   return view('frontend.master',compact('sharess'));    
+   }
 
+//End method
 
 
 }
