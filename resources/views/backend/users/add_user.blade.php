@@ -41,8 +41,8 @@
     <div class="controls">
      <select name="role" id="role"  class="form-control">
         <option value="" selected="" disabled="">Select Role</option>
-        <option value="Admin">Admin</option>
-        <option value="Operator">Operator</option>
+        <option value="1">Admin</option>
+        <option value="2">Operator</option>
          
       </select>
      </div>

@@ -104,6 +104,27 @@ $route = Route::current()->getName();
         </div>
     </li>
 
+  <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item {{ ($prefix == '/visitor')?'active':'' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiesdsfdsf"
+            aria-expanded="true" aria-controls="collapseUtilitiesdsfdsf">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Visitors</span>
+        </a>
+        <div id="collapseUtilitiesdsfdsf" class="collapse {{ ($prefix == '/visitor')?'show':'' }}" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              
+    <a class="collapse-item {{ ($route == 'visitor')?'active':'' }}" href="{{ route('visitor') }}">Visitors</a>
+
+
+            </div>
+        </div>
+    </li>
+
+
+
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -210,7 +231,7 @@ $route = Route::current()->getName();
 
 
 
-
+{{-- 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
@@ -223,7 +244,7 @@ $route = Route::current()->getName();
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
-            </li>
+            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

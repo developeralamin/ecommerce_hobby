@@ -17,6 +17,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WishListController;
 use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\VisitorController;
 
 
 /*
@@ -55,6 +56,13 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'],function(){
 
 
+
+Route::prefix('visitor')->group(function (){
+
+Route::get('/visitor',[VisitorController::class,'Visitorareaere'])->name('visitor');
+
+
+});
 
 Route::prefix('users')->group(function (){
 
@@ -230,6 +238,9 @@ Route::post('/contact',[FrontendController::class,'ContactHere'])->name('Contact
 
 Route::post('/news-letter',[FrontendController::class,'news_letter'])->name('news_letter');
 Route::get('/social_button',[FrontendController::class,'social_button'])->name('social_button');
+
+
+Route::get('/Visitorarea',[FrontendController::class,'Visitorarea'])->name('Visitorarea');
 
 
 

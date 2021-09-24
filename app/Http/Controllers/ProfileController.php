@@ -27,7 +27,7 @@ class ProfileController extends Controller
 
  public function EditProfile()
     {
-    	$id 			     = Auth::user()->id;
+    	$id 			           = Auth::user()->id;
     	$editData            = User::find($id);
 
     	return view('backend.users.edit_profile',compact('editData'));
@@ -53,7 +53,7 @@ class ProfileController extends Controller
            $data->address       = $request->address;
            $data->gender        = $request->gender;
            $data->mobile        = $request->mobile;
-           // $data->profile      = $ext;
+           $data->profile      = $ext;
                 
             $data->save();
 

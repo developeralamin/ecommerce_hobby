@@ -11,6 +11,9 @@ use App\Models\NewsLetter;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Share;
+use App\Models\Visitor;
+
+
 
 class FrontendController extends Controller
 {
@@ -19,6 +22,16 @@ class FrontendController extends Controller
     	 $this->data['categories']     = Category::all();
          $this->data['products']      = Product::latest()->get();
     	 $this->data['news_letter']   = NewsLetter::latest()->get();
+
+        $UserIp = $_SERVER['REMOTE_ADDR'];
+
+        date_default_timezone_set('Asia/Dhaka');
+        $timeDate = date('Y-m-d ,h:s:a');
+
+        Visitor::insert([
+          'ip_address'=>$UserIp,
+          'visit_time'=>$timeDate
+        ]);
     	 return view('frontend.main',$this->data);
     }
     
@@ -161,6 +174,22 @@ class FrontendController extends Controller
    }
 
 //End method
+
+   // public function Visitorarea()
+   // {
+   //     // $UserIp = $_SERVER['REMOTE_ADDR'];
+
+   //     //  date_default_timezone_set('Asia/Dhaka');
+   //     //  $timeDate = date('Y-m-d ,h:s:a');
+
+   //     //  Visitor::insert([
+   //     //    'ip_address'=>$UserIp,
+   //     //    'visit_time'=>$timeDate
+   //     //  ]);
+
+   //      return view('frontend.main');
+   // }
+
 
 
 }
