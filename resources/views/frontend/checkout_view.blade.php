@@ -138,30 +138,17 @@
  --}}
                 <div class="checkout__input__checkbox">
                                      
-                    <input id="stripe" type="radio"  required="" name="payment_status" value="stripe">
-                    <label for="stripe">Stripe</label>
+                    <input id="HandCash" type="radio"  required="" name="payment_status" value="HandCash">
+                    <label for="HandCash">HandCash</label>
                                     
                 </div>
 
                     <div class="checkout__input__checkbox"> 
-                          <input id="paypal" type="radio" name="payment_status" value="paypal">
-                          <label for="paypal">Paypal</label> 
+                          <input id="Online" type="radio" name="payment_status" value="Online">
+                          <label for="Online">Online</label> 
                                     
                 </div>
 
-
-
-                    <div class="checkout__input__checkbox">
-                                   
-                <input id="stripe" type="radio"  required="" name="payment_status" value="stripe">
-                    <label for="stripe">Stripe</label>
-                </div>
-
-                  <div class="checkout__input__checkbox">
-                                   
-                <input id="HandCash" type="radio"  required="" name="payment_status" value="HandCash">
-                    <label for="HandCash">HandCash</label>
-                </div>
 
                <button type="submit" class="site-btn">PLACE ORDER</button>
 

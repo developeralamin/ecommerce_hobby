@@ -23,7 +23,7 @@ class PaymentController extends Controller
   //  return $request->all();
   // die();
 
-    	  $final_output = $request->session()->get('final_output');
+    	 $final_output = $request->session()->get('final_output');
     	 $discount =  $request->session()->get('discount');
 
 
@@ -59,8 +59,8 @@ class PaymentController extends Controller
     foreach ($cartsss as $key => $items) {
     	 Billing::insertGetId([
     		'user_id'              => Auth::user()->id,
-            'sale_id'          => $sale_id,
-            'shipping_id'      => $shipping_id,
+            'sale_id'              => $sale_id,
+            'shipping_id'          => $shipping_id,
     		'product_id'           => $items->product_id,       
     		'product_price'        => $items['product']['product_price'],
     		'qty'                  => $items->qty,
@@ -72,8 +72,8 @@ class PaymentController extends Controller
     }
 
 
-    Session::flash('message','Product CheckOut Successfully Done');
-     return back();
+    // Session::flash('message','Product CheckOut Successfully Done');
+     return redirect('online/payment');
 
 
 

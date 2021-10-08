@@ -87,10 +87,10 @@ class CartController extends Controller
 
 //end method
 
-	public function SingleCartUpdate(Request $request)
+	public function SingleCartUpdate(Request $request )
 	{
-		  foreach ($request->cart_id as $key => $items) {
-     	    	Cart::findOrFail($items)->update([
+		  foreach ($request->cart_id as $key => $item) {
+     	    	Cart::findOrFail($item)->update([
                     'qty'  => $request->qty[$key]
      	    	]);
      	    }

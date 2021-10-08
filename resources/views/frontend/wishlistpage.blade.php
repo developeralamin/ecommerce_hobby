@@ -69,14 +69,14 @@
     
 
                 
-    {{-- <td class="shoping__cart__price">
+    <td class="shoping__cart__price">
          <form method="POST" action="{{ route('SingleCartProduct',$wish->id) }}">
                 @csrf
              <input type="hidden" name="product_price" value="{{  $wish['product']['product_price'] }}" >
 
-              <button  class="btn btn-sm btn-danger">Add to Cart</button>
+              {{-- <button type="submit" class="btn btn-sm btn-danger">Add to Cart</button> --}}
           </form>  
-    </td> --}}
+    </td>
 
         <td><a style="color: red;" href="{{ route('WishListDelete',$wish->id) }}" id="delete"><i class="fa fa-times"></i></a> </td>       
                                    

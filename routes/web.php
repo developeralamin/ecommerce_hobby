@@ -18,7 +18,7 @@ use App\Http\Controllers\WishListController;
 use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\VisitorController;
-
+use App\Http\Controllers\SslCommerzPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -246,3 +246,18 @@ Route::get('/Visitorarea',[FrontendController::class,'Visitorarea'])->name('Visi
 
 });
 ////Laravel Prevent Browser Back Button After Logout
+
+
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/online/payment', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END

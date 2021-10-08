@@ -106,8 +106,12 @@
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="{{ url('uploads/thumbnail',$items->product_thumbnail) }}">
                 <ul class="featured__item__pic__hover">
+@if(Auth::user())
 
-       <li><a href="{{ route('wishlist',$items->id) }}"><i class="fa fa-heart"></i></a></li>
+@else
+ <li><a href="{{ route('wishlist',$items->id) }}"><i class="fa fa-heart"></i></a></li>
+@endif
+      
 
        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
 
