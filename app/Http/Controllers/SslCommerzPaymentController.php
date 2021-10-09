@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -14,10 +17,28 @@ class SslCommerzPaymentController extends Controller
         return view('frontend.exampleEasycheckout');
     }
 
-    public function exampleHostedCheckout()
+    public function exampleHostedCheckout(Request $request)
     {
+        $discount =  $request->session()->get('discount');
         
-        return view('frontend.exampleHosted');
+         $auth_user = Auth::user();
+         $user_ip = $_SERVER['REMOTE_ADDR'];
+       $carts = Cart::where('user_ip',$user_ip)->with('product')->get();
+  
+
+   
+      $subtotal = 0;
+      foreach ($carts as $key => $cart) {
+         $subtotal +=$cart->product_price*$cart->qty;
+      }
+
+  
+      $total_with = $subtotal*$discount/100;
+      $final_output = $subtotal-$total_with;
+     
+     session(['final_output' => $final_output]);
+
+        return view('frontend.exampleHosted',compact('subtotal','final_output','discount'));
     }
 
     public function index(Request $request)
@@ -209,7 +230,7 @@ class SslCommerzPaymentController extends Controller
             #That means something wrong happened. You can redirect customer to your product page.
             echo "Invalid Transaction";
         }
-
+     return redirect('/cart-all');
 
     }
 

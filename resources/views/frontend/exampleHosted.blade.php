@@ -39,8 +39,8 @@
 
         $final_output = $request->session()->get('final_output');
          $discount =  $request->session()->get('discount');
-@endphp
- --}}
+@endphp --}}
+
 
     <div class="row">
         <div class="col-md-11 order-md-2 mb-4">
@@ -54,19 +54,19 @@
                         <h6 class="my-0">Total</h6>
                        
                     </div>
-                    <span class="text-muted"></span>
+                    <span class="text-muted">{{  $subtotal  }}</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
                         <h6 class="my-0">Discount</h6>
                        
                     </div>
-                    <span class="text-muted"></span>
+                    <span class="text-muted">{{  $discount  }}</span>
                 </li>
                
                 <li class="list-group-item d-flex justify-content-between">
-                    <span>Total (BDT)</span>
-                    <strong>{{  session(['final_output'])  }} TK</strong>
+                    <span>SubTotal (BDT)</span>
+                    <strong>{{  $final_output  }} TK</strong>
                 </li>
             </ul>
       
